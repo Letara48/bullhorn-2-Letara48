@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 @Controller
 public class HomeController {
-
     @Autowired
     MessagesRepository messagesRepository;
 
@@ -29,7 +28,7 @@ public class HomeController {
     }
     @PostMapping("/process")
     public String processForm(@Valid messages messages,
-        BindingResult result) {
+                              BindingResult result) {
         if (result.hasErrors()){
             return "Messagesform";
         }
@@ -44,7 +43,7 @@ public class HomeController {
     }
     @RequestMapping("/update/{id}")
     public String updateMessages(@PathVariable("id") long id,
-             Model model){
+                                 Model model){
         model.addAttribute("messages", messagesRepository.findById(id).get());
         return "messagesform";
     }
@@ -53,5 +52,6 @@ public class HomeController {
         messagesRepository.deleteById(id);
         return "redirect:/";
     }
+
 }
 
